@@ -2,7 +2,7 @@ const readline = require('readline');
 const fs = require('fs');
 
 
-const todos = [];
+let todos = [];
 const interface = readline.createInterface({input: process.stdin, output: process.stdout})
 const menu = `
 Your options are:
@@ -16,13 +16,16 @@ Your options are:
 `
 
 const loadTodos = function() {
-  todos.splice(0);
-  const file = fs.readFileSync('./todos.csv', 'utf8');
-  const rows = file.split('\n');
-  for (const rowString of rows) {
-    const todo = rowString.split(',')
-    todos.push(todo);
-  }
+  // todos.splice(0);
+  const file = fs.readFileSync(__dirname + '/../back-end/todos.json', 'utf8');
+  const todoData = JSON.parse(file);
+  todos = todoData.todos;
+  console.log(todos);
+  // const rows = file.split('\n');
+  // for (const rowString of rows) {
+  //   const todo = rowString.split(',')
+  //   todos.push(todo);
+  // }
 }
 
 const saveTodos = function() {
