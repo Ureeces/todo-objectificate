@@ -20,7 +20,6 @@ const loadTodos = function() {
   const todoData = JSON.parse(file);
   todos = todoData.todos;
   
-  console.log(todos);
 }
 
 const saveTodos = function() {
@@ -32,11 +31,11 @@ const saveTodos = function() {
 
 const displayTodos = function(shouldPrintNumber) {
   console.log('\nHere are your current todos:\n')
-  for (let i = 0; i < todos.length; i++) {
-    const todo = todos[i];
-    const text = todo[0];
-    const isComplete = todo[1];
-    const priority = todo[2];
+  let i = 0;
+  for (const todo of todos) {
+    const text = todo.text;
+    const isComplete = todo.isComplete;
+    const priority = todo.priority;
     const num = i + 1;
     let listSymbol = '*';
     let mark = '✖';
@@ -52,6 +51,7 @@ const displayTodos = function(shouldPrintNumber) {
     // or, using interpolation:
     // const todoLine = `${listSymbol} ${todo.text} - priority: ${todo.priority} - ${mark}`
     console.log(todoLine);
+    i++;
   }
 }
 
