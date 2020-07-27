@@ -16,26 +16,18 @@ Your options are:
 `
 
 const loadTodos = function() {
-  // todos.splice(0);
   const file = fs.readFileSync(__dirname + '/../back-end/todos.json', 'utf8');
   const todoData = JSON.parse(file);
   todos = todoData.todos;
+  
   console.log(todos);
-  // const rows = file.split('\n');
-  // for (const rowString of rows) {
-  //   const todo = rowString.split(',')
-  //   todos.push(todo);
-  // }
 }
 
 const saveTodos = function() {
-  const rowStrings = [];
-  for (const todo of todos) {
-    rowStrings.push(todo[0] + ',' + todo[1]);
-  }
-
-  const newContents = rowStrings.join('\n');
-  fs.writeFileSync('./todos.csv', newContents);
+  const changes = {"todos": todos};
+  const newContents = JSON.stringify(changes);
+  console.log(newContents);
+  fs.writeFileSync(__dirname + '/../back-end/todos.csv', newContents);
 }
 
 const displayTodos = function(shouldPrintNumber) {
